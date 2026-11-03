@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'">
+  <title>Mahyar VPN</title>
+  <link rel="stylesheet" href="neon.css">
+</head>
+<body>
+  <!-- ═══ cinematic background: glows, grid, beam, grain, particles ═══ -->
+  <div class="scene" aria-hidden="true">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="glow glow-core"></div>
+    <div class="grid-veil"></div>
+    <div class="beam"></div>
+    <div class="particles">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <div class="fireflies"><i></i><i></i><i></i><i></i></div>
+    <div class="grain"></div>
+  </div>
+
+  <!-- ═══ titlebar: window controls / centered typing brand / version ═══ -->
+  <header class="titlebar">
+    <div class="window-actions" dir="ltr">
+      <button id="btn-min" class="window-btn" title="کمینه‌سازی" aria-label="کمینه‌سازی"><svg viewBox="0 0 16 16"><path d="M3 8h10"/></svg></button>
+      <button id="btn-max" class="window-btn" title="بزرگ یا کوچک کردن پنجره" aria-label="بزرگ یا کوچک کردن پنجره"><svg viewBox="0 0 16 16"><rect x="3.5" y="3.5" width="9" height="9" rx="1"/></svg></button>
+      <button id="btn-hide" class="window-btn close" title="انتقال به کنار ساعت" aria-label="انتقال به کنار ساعت"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+    </div>
+
+    <div class="brand" dir="ltr">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2.5l7.5 3v5.2c0 4.9-3.2 8.9-7.5 10.8-4.3-1.9-7.5-5.9-7.5-10.8V5.5l7.5-3z"/><path class="bolt" d="M12.9 7l-3.4 5h2.2l-.9 4 3.7-5.2h-2.3l.7-3.8z"/></svg>
+      </span>
+      <span class="brand-copy">
+        <span class="brand-name"><span id="brand-type"></span><span class="caret" aria-hidden="true"></span></span>
+        <span class="brand-sub">DOMAIN FRONTING · NO SERVER</span>
+      </span>
+    </div>
+
+    <div class="tb-chip" dir="ltr" title="نسخه برنامه">v1.0.0</div>
+  </header>
+
+  <main class="workspace">
+    <!-- ═══════════════════════ VIEW 1 — اتصال ═══════════════════════ -->
+    <section class="view view-home is-active" id="view-home" data-view="home" role="tabpanel" aria-label="اتصال">
+      <section class="hero glass" aria-labelledby="st-head">
+        <div class="hero-top">
+          <div class="section-kicker" dir="ltr"><span>✦</span> CONNECTION</div>
+          <div class="hero-meta">
+            <span class="meta-chip hidden" id="chip-uptime"></span>
+            <span class="meta-chip green hidden" id="chip-live">● پروکسی فعال</span>
+          </div>
+        </div>
+
+        <div class="hero-core">
+          <div class="power-wrap">
+            <div class="ring ring-outer" aria-hidden="true"></div>
+            <div class="ring ring-mid" aria-hidden="true"></div>
+            <div class="ring ring-inner" aria-hidden="true"></div>
+            <div class="orbit" aria-hidden="true"><i></i></div>
+            <div class="spark spark-one" aria-hidden="true"></div>
+            <div class="spark spark-two" aria-hidden="true"></div>
+            <div class="spark spark-three" aria-hidden="true"></div>
+            <button id="btn-power" class="power" aria-label="اتصال یا قطع اتصال">
+              <span class="power-halo" aria-hidden="true"></span>
+              <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4v11M9 8.8a11 11 0 1 0 14 0"/></svg>
+            </button>
+          </div>
+          <div class="hero-text">
+            <div class="status-label"><span class="status-dot"></span> وضعیت اتصال</div>
+            <h2 id="st-head">آماده اتصال</h2>
+            <p id="st-sub">اول گواهی را بسازید؛ بعد نصبش کنید.</p>
+          </div>
+        </div>
+
+        <div class="hero-bottom"><span class="hero-rule"></span><span>فعال بودن پروکسی، دسترسی به سایت‌ها را تضمین نمی‌کند.</span></div>
+      </section>
+
+      <!-- nudge to the certificate section until setup is complete -->
+      <div class="cert-cta glass hidden" id="cert-cta" role="note">
+        <span class="cta-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.6-3 8.4-7 10-4-1.6-7-5.4-7-10V6l7-3z"/><path d="M9 11.5l2 2 4-4"/></svg>
+        </span>
+        <p><strong>گواهی آماده نیست.</strong> برای فعال شدن دکمه اتصال، راه‌اندازی را از بخش گواهی کامل کنید.</p>
+        <button class="btn sm primary" data-view-btn="cert">رفتن به بخش گواهی</button>
+      </div>
+
+      <section class="card glass traffic-card" aria-labelledby="traffic-heading">
+        <div class="card-head compact">
+          <div><div class="section-kicker" dir="ltr">LIVE TRAFFIC <span>✦</span></div><h2 id="traffic-heading">ترافیک زنده</h2></div>
+          <span class="pill" id="pill-traffic">—</span>
+        </div>
+        <div class="traffic">
+          <div class="t-item">
+            <div class="t-label down"><span class="t-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg></span> دانلود</div>
+            <div class="t-speed" id="spd-down">۰ <small>KB/s</small></div>
+            <div class="t-total" id="tot-down">مجموع: ۰</div>
+          </div>
+          <div class="t-item">
+            <div class="t-label up"><span class="t-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20V8m0 0l-5 5m5-5l5 5M5 4h14"/></svg></span> آپلود</div>
+            <div class="t-speed" id="spd-up">۰ <small>KB/s</small></div>
+            <div class="t-total" id="tot-up">مجموع: ۰</div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="foot"><span>فقط برنامه‌هایی که از پروکسی ویندوز استفاده می‌کنند.</span><span dir="ltr">MITM-DOMAINFRONTING / @PATTERNIHA</span></footer>
+    </section>
+
+    <!-- ═══════════════════════ VIEW 2 — گواهی ═══════════════════════ -->
+    <section class="view view-cert" id="view-cert" data-view="cert" role="tabpanel" aria-label="گواهی و راه‌اندازی">
+      <div class="intro view-intro">
+        <div><div class="overline"><span></span> CERTIFICATE &amp; SETUP</div><h1>گواهی و <em>راه‌اندازی</em></h1><p>هویت محلی همین دستگاه برای تونل دامین‌فرانتینگ.</p></div>
+      </div>
+      <div class="cert-grid">
+        <section class="card glass setup-card" aria-labelledby="setup-heading">
+          <div class="card-head"><div><div class="section-kicker" dir="ltr">GET STARTED <span>✦</span></div><h2 id="setup-heading">راه‌اندازی</h2></div><span class="pill" id="pill-setup">در انتظار</span></div>
+          <div class="step" id="step-mint">
+            <span class="step-dot" data-state="idle"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8.5" cy="15.5" r="4"/><path d="M11.5 12.5L20 4m-3.5 1l3 3m-6.5.5l2 2"/></svg></span>
+            <div class="step-body"><div class="step-title">ساخت گواهی محلی</div><div class="step-desc">یک کلید خصوصی برای همین دستگاه.</div></div>
+            <button class="btn sm" data-act="setup">ساخت</button>
+          </div>
+          <div class="step" id="step-trust">
+            <span class="step-dot" data-state="idle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.6-3 8.4-7 10-4-1.6-7-5.4-7-10V6l7-3z"/><path d="M9 11.5l2 2 4-4"/></svg></span>
+            <div class="step-body"><div class="step-title">نصب گواهی در ویندوز</div><div class="step-desc">فقط روی دستگاه مورد اعتماد نصب کنید.</div></div>
+            <button class="btn sm" data-act="trust">نصب</button>
+          </div>
+          <p class="security-note"><span>!</span> اعتماد به CA اجازه بررسی ترافیک رمزگذاری‌شده را به صاحب کلید می‌دهد.</p>
+          <div class="cert-error hidden" id="cert-error" role="alert"><strong>نصب گواهی کامل نشد</strong><pre id="cert-error-detail"></pre><button class="btn sm ghost" id="cert-error-close">بستن جزئیات</button></div>
+        </section>
+
+        <section class="card glass identity-card" aria-labelledby="cert-heading">
+          <div class="card-head compact">
+            <div><div class="section-kicker" dir="ltr">LOCAL IDENTITY <span>✦</span></div><h2 id="cert-heading">گواهی دستگاه</h2></div>
+            <span class="head-side"><span class="pill" id="pill-cert">—</span><span class="seal" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="5.5"/><path d="M9 14.8L7.5 21l4.5-2.4L16.5 21 15 14.8"/></svg></span></span>
+          </div>
+          <div class="kv"><span class="k">نام</span><span class="v" id="cert-cn">—</span><span class="k">اعتبار تا</span><span class="v" id="cert-exp">—</span><span class="k">اثر انگشت</span><span class="v mono" id="cert-sha">—</span></div>
+          <div class="row-btns"><button class="btn sm danger-ghost" data-act="remove">حذف گواهی</button><button class="btn sm ghost" data-act="openfile">پوشهٔ گواهی</button></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ VIEW 3 — گزارش ═══════════════════════ -->
+    <section class="view view-logs" id="view-logs" data-view="logs" role="tabpanel" aria-label="گزارش سیستم">
+      <div class="intro view-intro">
+        <div><div class="overline"><span></span> SYSTEM LOG</div><h1>گزارش <em>سیستم</em></h1><p>جزئیات هسته و خطاها را اینجا ببین.</p></div>
+      </div>
+      <section class="card glass log-card" aria-labelledby="log-heading">
+        <div class="card-head compact">
+          <div><div class="section-kicker" dir="ltr">XRAY CORE <span>✦</span></div><h2 id="log-heading">خروجی هسته</h2></div>
+          <button class="btn sm ghost" id="btn-log-toggle" aria-expanded="false" aria-controls="log">نمایش</button>
+        </div>
+        <div class="log hidden" id="log" dir="ltr"></div>
+      </section>
+    </section>
+  </main>
+
+  <!-- ═══ floating glass dock — navigation between the three sections ═══ -->
+  <nav class="dock" dir="rtl" aria-label="بخش‌های برنامه">
+    <button class="dock-btn is-active" data-view-btn="home" role="tab" aria-selected="true" title="اتصال">
+      <span class="dock-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.2 3.4 3.2 14.6 0 18M12 3c-3.2 3.4-3.2 14.6 0 18"/></svg></span>
+      <span class="dock-label">اتصال</span>
+    </button>
+    <button class="dock-btn" data-view-btn="cert" role="tab" aria-selected="false" title="گواهی">
+      <span class="dock-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.6-3 8.4-7 10-4-1.6-7-5.4-7-10V6l7-3z"/><path d="M9 11.5l2 2 4-4"/></svg></span>
+      <span class="dock-label">گواهی</span>
+    </button>
+    <button class="dock-btn" data-view-btn="logs" role="tab" aria-selected="false" title="گزارش">
+      <span class="dock-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path class="term-prompt" d="M7 9.5l3 2.5-3 2.5"/><rect class="term-cursor" x="12" y="13.8" width="4" height="1.6" rx="0.8"/></svg></span>
+      <span class="dock-label">گزارش</span>
+    </button>
+  </nav>
+
+  <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
